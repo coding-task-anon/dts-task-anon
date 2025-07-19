@@ -9,9 +9,10 @@ import java.time.LocalDate;
 public class TaskEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
     @Column

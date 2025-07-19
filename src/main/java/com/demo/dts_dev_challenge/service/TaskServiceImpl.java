@@ -49,14 +49,13 @@ public class TaskServiceImpl implements TaskService {
         taskEntity.getDueDate());
   }
 
-  @Override
-  public List<TaskResponse> getTasksByStatus(TaskStatus taskStatus) {
-    return List.of();
-  }
 
   @Override
-  public List<TaskResponse> getAllTasks() {
-    List<TaskEntity> respositoryAll = taskRespository.findAll();
-    return respositoryAll.stream().map(this::buildTaskResponse).toList();
+  public List<TaskResponse> getAllTasks(TaskStatus taskStatus) {
+    if(taskStatus == null){
+      return taskRespository.findAll().stream().map(this::buildTaskResponse).toList();
+    }
+    return taskRespository.findAllByTaskStatus(taskStatus)
+    .stream().map(this::buildTaskResponse).toList();
   }
 }

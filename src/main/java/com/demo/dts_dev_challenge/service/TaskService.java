@@ -12,7 +12,5 @@ public interface TaskService {
 
     TaskResponse getTaskByID(long id);
 
-    List<TaskResponse> getTasksByStatus(TaskStatus taskStatus);
-
-    List<TaskResponse> getAllTasks();
+    List<TaskResponse> getAllTasks(TaskStatus taskStatus);
 }

@@ -1,14 +1,45 @@
 package com.demo.dts_dev_challenge.controller;
 
+import com.demo.dts_dev_challenge.dto.request.CreateTaskRequest;
+import com.demo.dts_dev_challenge.dto.response.TaskResponse;
+import com.demo.dts_dev_challenge.enums.TaskStatus;
+import com.demo.dts_dev_challenge.service.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping("/tasks")
 public class TasksController {
+
+    private final TaskService taskService;
+
+
+    public TasksController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @Operation(description = "Get Task")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskResponse getTaskById(@PathVariable long id){
+        return taskService.getTaskByID(id);
+    }
+
+    @Operation(description = "Create Task")
+    @PostMapping(value = ("/"), produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskResponse createTask(CreateTaskRequest createTaskRequest){
+        return taskService.createTask(createTaskRequest);
+    }
+
+    @Operation(description = "Get All Tasks")
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TaskResponse> getAllTasks(@RequestParam(value = "taskStatus", required = false)TaskStatus taskStatus){
+        return taskService.getAllTasks(taskStatus);
+    }
 
 
 }
