@@ -21,7 +21,13 @@ public class TaskServiceImpl implements TaskService {
 
   @Override
   public TaskResponse createTask(CreateTaskRequest createTaskRequest) {
-    return null;
+    TaskEntity entity = new TaskEntity();
+    entity.setName(createTaskRequest.name());
+    entity.setDescription(createTaskRequest.description());
+    entity.setDueDate(createTaskRequest.dueDate());
+    entity.setTaskStatus(TaskStatus.PENDING);
+    TaskEntity saved = taskRespository.save(entity);
+    return this.buildTaskResponse(saved);
   }
 
   @Override
@@ -49,7 +55,8 @@ public class TaskServiceImpl implements TaskService {
   }
 
   @Override
-  public List<TaskResponse> getAllTaskSummaries() {
-    return List.of();
+  public List<TaskResponse> getAllTasks() {
+    List<TaskEntity> respositoryAll = taskRespository.findAll();
+    return respositoryAll.stream().map(this::buildTaskResponse).toList();
   }
 }

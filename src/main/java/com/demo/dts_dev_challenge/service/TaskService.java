@@ -14,5 +14,5 @@ public interface TaskService {
 
     List<TaskResponse> getTasksByStatus(TaskStatus taskStatus);
 
-    List<TaskResponse> getAllTaskSummaries();
+    List<TaskResponse> getAllTasks();
 }
