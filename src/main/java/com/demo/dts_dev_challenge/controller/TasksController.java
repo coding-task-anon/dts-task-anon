@@ -50,8 +50,9 @@ public class TasksController {
     }
 
     @Operation(description = "Delete task by id")
-    @DeleteMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Integer> deleteTask(long id){
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Integer> deleteTask(@PathVariable final long id){
+        log.info("Delete called for id {%s}".formatted(id));
         return taskService.deleteTask(id);
     }
 
