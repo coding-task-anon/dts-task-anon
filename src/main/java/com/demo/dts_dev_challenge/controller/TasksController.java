@@ -33,7 +33,8 @@ public class TasksController {
 
     @Operation(description = "Create Task")
     @PostMapping(value = ("/"), produces = MediaType.APPLICATION_JSON_VALUE)
-    public TaskResponse createTask(CreateTaskRequest createTaskRequest){
+    public TaskResponse createTask(@RequestBody CreateTaskRequest createTaskRequest){
+        log.info(createTaskRequest.toString());
         return taskService.createTask(createTaskRequest);
     }
 
