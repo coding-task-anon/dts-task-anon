@@ -28,6 +28,7 @@ public class TasksController {
     @Operation(description = "Get Task")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TaskResponse getTaskById(@PathVariable long id){
+        log.info("Get task for id {%s}".formatted(id));
         return taskService.getTaskByID(id);
     }
 
