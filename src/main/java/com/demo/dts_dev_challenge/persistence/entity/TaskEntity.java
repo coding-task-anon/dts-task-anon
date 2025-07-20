@@ -15,13 +15,13 @@ public class TaskEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column
+    @Column(name = "DUE_DATE")
     private LocalDate dueDate;
 
-    @Column
+    @Column(name = "TASK_STATUS")
     private TaskStatus taskStatus;
 
 

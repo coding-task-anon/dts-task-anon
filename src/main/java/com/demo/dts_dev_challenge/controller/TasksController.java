@@ -1,6 +1,7 @@
 package com.demo.dts_dev_challenge.controller;
 
 import com.demo.dts_dev_challenge.dto.request.CreateTaskRequest;
+import com.demo.dts_dev_challenge.dto.request.EditTaskRequest;
 import com.demo.dts_dev_challenge.dto.response.TaskResponse;
 import com.demo.dts_dev_challenge.enums.TaskStatus;
 import com.demo.dts_dev_challenge.service.TaskService;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -39,6 +41,18 @@ public class TasksController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TaskResponse> getAllTasks(@RequestParam(value = "taskStatus", required = false)TaskStatus taskStatus){
         return taskService.getAllTasks(taskStatus);
+    }
+
+    @Operation(description = "Edit an existing task")
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskResponse editExistingTask(@PathVariable final long id, @RequestBody final EditTaskRequest editTaskRequest){
+        return taskService.editTask(id , editTaskRequest);
+    }
+
+    @Operation(description = "Delete task by id")
+    @DeleteMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Integer> deleteTask(long id){
+        return taskService.deleteTask(id);
     }
 
 

@@ -1,6 +1,7 @@
 package com.demo.dts_dev_challenge.service;
 
 import com.demo.dts_dev_challenge.dto.request.CreateTaskRequest;
+import com.demo.dts_dev_challenge.dto.request.EditTaskRequest;
 import com.demo.dts_dev_challenge.dto.response.TaskResponse;
 import com.demo.dts_dev_challenge.enums.TaskStatus;
 import com.demo.dts_dev_challenge.persistence.entity.TaskEntity;
@@ -62,6 +63,16 @@ class TaskServiceImplTest {
         taskService.createTask(
             new CreateTaskRequest("Test Task", "Example test task", LocalDate.of(2025, 12, 25)));
     Assertions.assertNotNull(task);
+  }
+
+  @Test
+  void editTask(){
+    Optional<TaskEntity> taskEntity = Optional.of(getTaskEntity(1L));
+    TaskEntity editedEntity = taskEntity.orElseThrow();
+    Mockito.when(taskRespository.findById(1L)).thenReturn(taskEntity);
+    Mockito.when(taskRespository.save(Mockito.any(TaskEntity.class))).thenReturn(getTaskEntity(1L));
+    taskService.editTask(1L, new EditTaskRequest("Test Task", "Example test task", LocalDate.of(2025, 12, 25), TaskStatus.IN_PROGRESS));
+
   }
 
   private static TaskEntity getTaskEntity(long id) {
