@@ -9,7 +9,7 @@ public record CreateTaskRequest(String name, String description, LocalDate dueDa
         if (name.isBlank()) {
             throw new IllegalArgumentException("Required Field");
         }
-        if (dueDate == null || dueDate().isBefore(LocalDate.now())) {
+        if (dueDate == null || dueDate.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Due date is required and must be in the future");
         }
     }
