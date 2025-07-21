@@ -6,11 +6,10 @@ import com.demo.dts_dev_challenge.dto.response.TaskResponse;
 import com.demo.dts_dev_challenge.enums.TaskStatus;
 import com.demo.dts_dev_challenge.persistence.entity.TaskEntity;
 import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRespository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
 
@@ -54,15 +53,9 @@ public class TaskServiceImpl implements TaskService {
         taskEntity.getDueDate());
   }
 
-
   @Override
-  public List<TaskResponse> getAllTasks(TaskStatus taskStatus) {
-    if (taskStatus == null) {
-      return taskRespository.findAll().stream().map(this::buildTaskResponse).toList();
-    }
-    return taskRespository.findAllByTaskStatus(taskStatus).stream()
-        .map(this::buildTaskResponse)
-        .toList();
+  public List<TaskResponse> getAllTasks() {
+    return taskRespository.findAll().stream().map(this::buildTaskResponse).toList();
   }
 
   @Transactional
@@ -84,7 +77,7 @@ public class TaskServiceImpl implements TaskService {
   @Override
   public Map<String, Integer> deleteTask(long id) {
     int recordDelete = taskRespository.deleteById(id);
-    if(recordDelete == 0){
+    if (recordDelete == 0) {
       throw new IllegalArgumentException("No task with id : {%}".formatted(id));
     }
     return Map.of("Record Deleted", recordDelete);

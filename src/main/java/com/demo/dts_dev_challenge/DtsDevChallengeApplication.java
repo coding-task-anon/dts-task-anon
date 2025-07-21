@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DtsDevChallengeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DtsDevChallengeApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(DtsDevChallengeApplication.class, args);
+  }
 }
