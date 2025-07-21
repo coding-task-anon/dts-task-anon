@@ -41,7 +41,7 @@ class TaskServiceImplTest {
   void testGetAllTasks() {
     List<TaskEntity> taskEntityList = List.of(getTaskEntity(1L), getTaskEntity(2L));
     Mockito.when(taskRespository.findAll()).thenReturn(taskEntityList);
-    List<TaskResponse> allTasks = taskService.getAllTasks(null);
+    List<TaskResponse> allTasks = taskService.getAllTasks();
     Assertions.assertNotNull(allTasks);
     Assertions.assertEquals(2, allTasks.size());
   }
@@ -50,7 +50,7 @@ class TaskServiceImplTest {
   void testGetAllTasksReturnsEmpty() {
     List<TaskEntity> taskEntityList = new ArrayList<>();
     Mockito.when(taskRespository.findAll()).thenReturn(taskEntityList);
-    List<TaskResponse> allTasks = taskService.getAllTasks(null);
+    List<TaskResponse> allTasks = taskService.getAllTasks();
     Assertions.assertNotNull(allTasks);
     Assertions.assertTrue(allTasks.isEmpty());
   }
