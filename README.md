@@ -1,4 +1,4 @@
-# dts-dev-challenge
+# DTS Developer Technical Test
 
 A Spring Boot REST API for managing tasks, built as a coding challenge for MOJ Senior Developer.
 
