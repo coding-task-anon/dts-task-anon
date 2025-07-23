@@ -5,7 +5,7 @@ import com.demo.dts_dev_challenge.dto.request.EditTaskRequest;
 import com.demo.dts_dev_challenge.dto.response.TaskResponse;
 import com.demo.dts_dev_challenge.enums.TaskStatus;
 import com.demo.dts_dev_challenge.persistence.entity.TaskEntity;
-import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRespository;
+import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-  private final WorkTaskRespository taskRespository;
+  private final WorkTaskRepository taskRespository;
 
-  public TaskServiceImpl(WorkTaskRespository taskRespository) {
+  public TaskServiceImpl(WorkTaskRepository taskRespository) {
     this.taskRespository = taskRespository;
   }
 
@@ -70,7 +70,8 @@ public class TaskServiceImpl implements TaskService {
                     new DataAccessResourceFailureException(
                         "Task not found for id {%s}".formatted(id)));
 
-    return this.buildTaskResponse(entity);
+    TaskEntity saved = taskRespository.save(entity);
+    return this.buildTaskResponse(saved);
   }
 
   @Transactional
@@ -78,23 +79,24 @@ public class TaskServiceImpl implements TaskService {
   public Map<String, Integer> deleteTask(long id) {
     int recordDelete = taskRespository.deleteById(id);
     if (recordDelete == 0) {
-      throw new IllegalArgumentException("No task with id : {%}".formatted(id));
+      throw new IllegalArgumentException("No task with id : {%d}".formatted(id));
     }
-    return Map.of("Record Deleted", recordDelete);
+    return Map.of("Records Deleted", recordDelete);
   }
 
-  private TaskEntity updateTask(TaskEntity taskEntity, EditTaskRequest task) {
-    if (!task.name().equals(taskEntity.getName())) {
-      taskEntity.setName(task.name());
+  private static TaskEntity updateTask(final TaskEntity taskEntity, final EditTaskRequest editTaskRequest) {
+
+    if (editTaskRequest.name() != null && !editTaskRequest.name().equals(taskEntity.getName())) {
+      taskEntity.setName(editTaskRequest.name());
     }
-    if (!task.description().equals(taskEntity.getDescription())) {
-      taskEntity.setDescription(task.description());
+    if (editTaskRequest.description() != null && !editTaskRequest.description().equals(taskEntity.getDescription())) {
+      taskEntity.setDescription(editTaskRequest.description());
     }
-    if (!task.taskStatus().equals(taskEntity.getTaskStatus())) {
-      taskEntity.setTaskStatus(task.taskStatus());
+    if (editTaskRequest.taskStatus() != null && !editTaskRequest.taskStatus().equals(taskEntity.getTaskStatus())) {
+      taskEntity.setTaskStatus(editTaskRequest.taskStatus());
     }
-    if (!task.dueDate().equals(taskEntity.getDueDate())) {
-      taskEntity.setDueDate(task.dueDate());
+    if (editTaskRequest.dueDate() != null && !editTaskRequest.dueDate().equals(taskEntity.getDueDate())) {
+      taskEntity.setDueDate(editTaskRequest.dueDate());
     }
     return taskEntity;
   }

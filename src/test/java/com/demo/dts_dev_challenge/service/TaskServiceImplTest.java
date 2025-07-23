@@ -5,7 +5,7 @@ import com.demo.dts_dev_challenge.dto.request.EditTaskRequest;
 import com.demo.dts_dev_challenge.dto.response.TaskResponse;
 import com.demo.dts_dev_challenge.enums.TaskStatus;
 import com.demo.dts_dev_challenge.persistence.entity.TaskEntity;
-import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRespository;
+import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ import org.mockito.Mockito;
 
 class TaskServiceImplTest {
 
-  private static WorkTaskRespository taskRespository;
+  private static WorkTaskRepository taskRespository;
 
   private static TaskServiceImpl taskService;
 
   @BeforeAll
   static void setUp() {
-    taskRespository = Mockito.mock(WorkTaskRespository.class);
+    taskRespository = Mockito.mock(WorkTaskRepository.class);
     taskService = new TaskServiceImpl(taskRespository);
   }
 

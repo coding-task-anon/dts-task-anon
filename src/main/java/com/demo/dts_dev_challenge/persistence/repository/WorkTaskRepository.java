@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WorkTaskRespository extends JpaRepository<TaskEntity, Long> {
+public interface WorkTaskRepository extends JpaRepository<TaskEntity, Long> {
 
   @Modifying
   @Query("DELETE FROM TASK t WHERE t.id = :id")
