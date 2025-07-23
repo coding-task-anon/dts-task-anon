@@ -9,9 +9,7 @@ import com.demo.dts_dev_challenge.persistence.entity.TaskEntity;
 import com.demo.dts_dev_challenge.persistence.repository.WorkTaskRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -40,7 +38,7 @@ public class TaskIntegrationTest {
         new CreateTaskRequest("Test Title", "Test Description", LocalDate.of(2026, 12, 25));
     TaskResponse task = tasksController.createTask(createTaskRequest);
     Assertions.assertNotNull(task.id());
-    Assertions.assertEquals("Test Title", task.name());
+    Assertions.assertEquals("Test Title", task.title());
     Assertions.assertEquals(TaskStatus.PENDING, task.taskStatus());
   }
 
@@ -53,7 +51,7 @@ public class TaskIntegrationTest {
         new EditTaskRequest("Updated Title", null, null, TaskStatus.IN_PROGRESS);
     TaskResponse taskResponse = tasksController.editExistingTask(id, editTaskRequest);
     Assertions.assertNotNull(taskResponse);
-    Assertions.assertEquals("Updated Title", taskResponse.name());
+    Assertions.assertEquals("Updated Title", taskResponse.title());
     Assertions.assertEquals(TaskStatus.IN_PROGRESS, taskResponse.taskStatus());
   }
 
@@ -97,14 +95,14 @@ public class TaskIntegrationTest {
     TaskEntity taskOne = getTaskEntity("Test 1");
     TaskEntity saved = repository.save(taskOne);
     TaskResponse taskById = tasksController.getTaskById(saved.getId());
-    Assertions.assertEquals("Test 1", taskById.name());
+    Assertions.assertEquals("Test 1", taskById.title());
 
 
   }
 
   private static TaskEntity getTaskEntity(String testTitle) {
     TaskEntity taskEntity = new TaskEntity();
-    taskEntity.setName(testTitle);
+    taskEntity.setTitle(testTitle);
     taskEntity.setDescription("Test Description");
     taskEntity.setTaskStatus(TaskStatus.PENDING);
     taskEntity.setDueDate(LocalDate.of(2025, 1, 1));

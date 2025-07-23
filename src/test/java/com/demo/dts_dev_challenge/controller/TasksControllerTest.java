@@ -48,7 +48,7 @@ class TasksControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(taskId))
-                .andExpect(jsonPath("$.name").value("Sample Task"))
+                .andExpect(jsonPath("$.title").value("Sample Task"))
                 .andExpect(jsonPath("$.taskStatus").value("PENDING"))
                 .andExpect(jsonPath("$.description").value("Sample description"));
     }
@@ -68,7 +68,7 @@ class TasksControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.name").value("New Task"))
+                .andExpect(jsonPath("$.title").value("New Task"))
                 .andExpect(jsonPath("$.taskStatus").value("PENDING"))
                 .andExpect(jsonPath("$.description").value("Sample description"));
     }
@@ -91,13 +91,13 @@ class TasksControllerTest {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(3))
                 .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].name").value("Task 1"))
+                .andExpect(jsonPath("$[0].title").value("Task 1"))
                 .andExpect(jsonPath("$[0].taskStatus").value("PENDING"))
                 .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].name").value("Task 2"))
+                .andExpect(jsonPath("$[1].title").value("Task 2"))
                 .andExpect(jsonPath("$[1].taskStatus").value("IN_PROGRESS"))
                 .andExpect(jsonPath("$[2].id").value(3L))
-                .andExpect(jsonPath("$[2].name").value("Task 3"))
+                .andExpect(jsonPath("$[2].title").value("Task 3"))
                 .andExpect(jsonPath("$[2].taskStatus").value("COMPLETED"));
     }
 
@@ -126,7 +126,7 @@ class TasksControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(taskId))
-                .andExpect(jsonPath("$.name").value("Updated Task"))
+                .andExpect(jsonPath("$.title").value("Updated Task"))
                 .andExpect(jsonPath("$.taskStatus").value("IN_PROGRESS"));
     }
 

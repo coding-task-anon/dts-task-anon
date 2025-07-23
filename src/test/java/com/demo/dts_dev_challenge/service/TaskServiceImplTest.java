@@ -78,7 +78,7 @@ class TaskServiceImplTest {
   private static TaskEntity getTaskEntity(long id) {
     TaskEntity taskEntity = new TaskEntity();
     taskEntity.setId(id);
-    taskEntity.setName("Test Task");
+    taskEntity.setTitle("Test Task");
     taskEntity.setDescription("Example test task");
     taskEntity.setTaskStatus(TaskStatus.PENDING);
     taskEntity.setDueDate(LocalDate.of(2025, 12, 25));

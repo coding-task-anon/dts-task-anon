@@ -7,10 +7,13 @@ import com.demo.dts_dev_challenge.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name ="Task Controller")
 @Slf4j
 @RestController
 @RequestMapping("/tasks")

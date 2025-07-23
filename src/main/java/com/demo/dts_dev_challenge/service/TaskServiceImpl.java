@@ -26,7 +26,7 @@ public class TaskServiceImpl implements TaskService {
   @Override
   public TaskResponse createTask(CreateTaskRequest createTaskRequest) {
     TaskEntity entity = new TaskEntity();
-    entity.setName(createTaskRequest.name());
+    entity.setTitle(createTaskRequest.title());
     entity.setDescription(createTaskRequest.description());
     entity.setDueDate(createTaskRequest.dueDate());
     entity.setTaskStatus(TaskStatus.PENDING);
@@ -47,7 +47,7 @@ public class TaskServiceImpl implements TaskService {
   private TaskResponse buildTaskResponse(TaskEntity taskEntity) {
     return new TaskResponse(
         taskEntity.getId(),
-        taskEntity.getName(),
+        taskEntity.getTitle(),
         taskEntity.getDescription(),
         taskEntity.getTaskStatus(),
         taskEntity.getDueDate());
@@ -86,8 +86,8 @@ public class TaskServiceImpl implements TaskService {
 
   private static TaskEntity updateTask(final TaskEntity taskEntity, final EditTaskRequest editTaskRequest) {
 
-    if (editTaskRequest.name() != null && !editTaskRequest.name().equals(taskEntity.getName())) {
-      taskEntity.setName(editTaskRequest.name());
+    if (editTaskRequest.title() != null && !editTaskRequest.title().equals(taskEntity.getTitle())) {
+      taskEntity.setTitle(editTaskRequest.title());
     }
     if (editTaskRequest.description() != null && !editTaskRequest.description().equals(taskEntity.getDescription())) {
       taskEntity.setDescription(editTaskRequest.description());

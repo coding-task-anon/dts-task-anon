@@ -3,10 +3,10 @@ package com.demo.dts_dev_challenge.dto.request;
 
 import java.time.LocalDate;
 
-public record CreateTaskRequest(String name, String description, LocalDate dueDate) {
+public record CreateTaskRequest(String title, String description, LocalDate dueDate) {
 
     public CreateTaskRequest{
-        if (name.isBlank()) {
+        if (title.isBlank()) {
             throw new IllegalArgumentException("Required Field");
         }
         if (dueDate == null || dueDate.isBefore(LocalDate.now())) {

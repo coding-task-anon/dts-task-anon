@@ -11,8 +11,8 @@ public class TaskEntity {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
 
-  @Column(name = "NAME")
-  private String name;
+  @Column(name = "TITLE")
+  private String title;
 
   @Column(name = "DESCRIPTION")
   private String description;
@@ -31,12 +31,12 @@ public class TaskEntity {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public String getDescription() {

@@ -39,12 +39,12 @@ class WorkTaskRepositoryTest {
         TaskEntity taskEntity = getTaskEntity("Test Title");
         TaskEntity saved = repository.save(taskEntity);
         Assertions.assertNotNull(saved);
-        Assertions.assertEquals("Test Title", saved.getName());
+        Assertions.assertEquals("Test Title", saved.getTitle());
 
         // Verify it can be found in database
         Optional<TaskEntity> foundTask = repository.findById(saved.getId());
         Assertions.assertTrue(foundTask.isPresent());
-        Assertions.assertEquals("Test Title", foundTask.get().getName());
+        Assertions.assertEquals("Test Title", foundTask.get().getTitle());
     }
 
     @Test
@@ -80,7 +80,7 @@ class WorkTaskRepositoryTest {
 
     private static TaskEntity getTaskEntity(String testTitle) {
         TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setName(testTitle);
+        taskEntity.setTitle(testTitle);
         taskEntity.setDescription("Test Description");
         taskEntity.setTaskStatus(TaskStatus.PENDING);
         taskEntity.setDueDate(LocalDate.of(2025, 1, 1));
