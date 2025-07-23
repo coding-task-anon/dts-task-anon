@@ -63,3 +63,9 @@ See [`src/main/resources/application.properties`](src/main/resources/application
 
 - `src/main/java/com/demo/dts_dev_challenge/` - Main source code
 - `src/test/java/com/demo/dts_dev_challenge/` - Unit and integration tests
+
+## Areas for Improvement
+
+- User login, assignment of tasks
+- Audit records and versioning
+- Validation on progression of Task Status
