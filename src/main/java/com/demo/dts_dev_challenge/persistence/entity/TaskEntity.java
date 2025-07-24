@@ -14,7 +14,8 @@ public class TaskEntity {
   @Column(name = "TITLE")
   private String title;
 
-  @Column(name = "DESCRIPTION")
+  @Column(name = "DESCRIPTION", length = 2000)
+  @Lob
   private String description;
 
   @Column(name = "DUE_DATE")
